@@ -20,6 +20,7 @@ Module.register("MMM-Domoticz", {
     energyNow: "Currently", // Label to show current use
     energyTotal: "Total used", // Label for total registred energy used
     energyToday: "Today used", // Label for energy used today
+    gasUsedToday: "Gas used today", // Label for gas usage
     showItems: [
       "temperature",
       "energy",
@@ -245,9 +246,9 @@ Module.register("MMM-Domoticz", {
               voltage +=
                 '<tr><td class="small">' +
                 dev.Name +
-                '</td><td class="small ' +
+                '</td><td class="small">' +
                 dev.Data +
-                '"></td></tr>';
+                '</td></tr>';
             }
           }
         }
@@ -384,7 +385,7 @@ Module.register("MMM-Domoticz", {
         " kWh</td></tr>";
       text +=
         '<tr><td class="small">' +
-        'Gas used today' +
+        this.config.gasUsedToday +
         '</td><td class="small">' +
         parseFloat(gasUse).toFixed(3) +
         " m3</td></tr>";
