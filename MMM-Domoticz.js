@@ -239,8 +239,8 @@ Module.register("MMM-Domoticz", {
             "%</td></tr>";
         }
         if (dev.Type == "General") {
-          if (dev.subType) {
-            if (dev.subType == "Voltage" || dev.subType == "Current") {
+          if (dev.SubType) {
+            if (dev.SubType == "Voltage" || dev.SubType == "Current") {
               // For both current and voltage */
               voltageCount++;
               voltage +=
@@ -252,6 +252,15 @@ Module.register("MMM-Domoticz", {
             }
           }
         }
+        // if (dev.SubType == "Gas") {
+        //   gasCount++;
+        //   gas +=
+        //     '<tr><td class="small">' +
+        //     dev.Name +
+        //     '</td><td class="small">' +
+        //     dev.CounterToday +
+        //     '</td></tr>';
+        // }
         if (dev.Name == "Domoticz Security Panel") {
           // for domoticz alarm
           alarmCount++;
