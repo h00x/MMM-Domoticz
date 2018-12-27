@@ -72,7 +72,7 @@ Module.register("MMM-Domoticz", {
     humi = "";
     baro = "";
     tempName = "";
-    volt = "";
+    voltage = "";
     alarm = "";
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
