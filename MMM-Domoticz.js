@@ -429,7 +429,7 @@ Module.register("MMM-Domoticz", {
     if (!this.loaded) {
       content = this.html.loading;
     } else if (this.data.position.endsWith("left")) {
-      content = '<ul class="flip">' + this.dom + "</ul>";
+      content = '<ul>' + this.dom + "</ul>";
     } else {
       content = "<ul>" + this.dom + "</ul>";
     }
