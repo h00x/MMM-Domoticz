@@ -250,7 +250,7 @@ Module.register("MMM-Domoticz", {
           gasCount++;
           gas +=
             '<tr><td class="small">' +
-            dev.Name +
+            this.config.gasUsedToday +
             '</td><td class="small">' +
             dev.CounterToday +
             '</td></tr>';
