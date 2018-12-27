@@ -74,6 +74,7 @@ Module.register("MMM-Domoticz", {
     tempName = "";
     voltage = "";
     alarm = "";
+    gas = "";
     // make separate tables if subMenus are required
     if (this.config.subMenus === true) {
       var therm =
@@ -119,7 +120,6 @@ Module.register("MMM-Domoticz", {
     var powerUse = 0;
     usedEnergy = 0;
     todayEnergy = 0;
-    gasUse = 0;
     var powerCount = 0;
     tempCount = 0;
     coCount = 0;
@@ -127,6 +127,7 @@ Module.register("MMM-Domoticz", {
     blindsCount = 0;
     voltageCount = 0;
     alarmCount = 0;
+    gasCount = 0;
     // loop the length of the received json file
     for (i = 0; i < data.result.length; i++) {
       // set for one device
@@ -149,13 +150,6 @@ Module.register("MMM-Domoticz", {
           wtt = dev.CounterToday.split(" ");
           if (wtt.length > 0) {
             todayEnergy += parseFloat(wtt[0]);
-          }
-        }
-        // add a counter for gas usage
-        if (dev.SubType === "Gas") {
-          gu = dev.CounterToday.split(" ");
-          if (gu.length > 0) {
-            gasUse += parseFloat(gu[0]);
           }
         }
         if (dev.Type.indexOf("Temp") > -1) {
@@ -252,15 +246,15 @@ Module.register("MMM-Domoticz", {
             }
           }
         }
-        // if (dev.SubType == "Gas") {
-        //   gasCount++;
-        //   gas +=
-        //     '<tr><td class="small">' +
-        //     dev.Name +
-        //     '</td><td class="small">' +
-        //     dev.CounterToday +
-        //     '</td></tr>';
-        // }
+        if (dev.SubType == "Gas") {
+          gasCount++;
+          gas +=
+            '<tr><td class="small">' +
+            dev.Name +
+            '</td><td class="small">' +
+            dev.CounterToday +
+            '</td></tr>';
+        }
         if (dev.Name == "Domoticz Security Panel") {
           // for domoticz alarm
           alarmCount++;
@@ -376,6 +370,9 @@ Module.register("MMM-Domoticz", {
     if (coCount > 0) {
       text += this.config.showItems.indexOf("co") !== -1 ? co : "";
     }
+    if (gasCount > 0) {
+      text += this.config.showItems.indexOf("gas") !== -1 ? gas : "";
+    }
     if (this.config.showItems.indexOf("usage") !== -1) {
       if (this.config.subMenus === true) {
         text += "<table>";
@@ -392,12 +389,6 @@ Module.register("MMM-Domoticz", {
         '</td><td class="small">' +
         parseFloat(todayEnergy).toFixed(3) +
         " kWh</td></tr>";
-      text +=
-        '<tr><td class="small">' +
-        this.config.gasUsedToday +
-        '</td><td class="small">' +
-        parseFloat(gasUse).toFixed(3) +
-        " m3</td></tr>";
       if (this.config.subMenus === true) {
         text += "</table>";
       }
